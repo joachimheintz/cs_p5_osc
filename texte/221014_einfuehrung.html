@@ -1,0 +1,65 @@
+<h1 id="processing-einführung">Processing Einführung</h1>
+<p>Ich folge hier weitgehend dem Tutorial <a href="https://processing.org/tutorials/overview"><em>Processing Overview</em></a> von Casey Reas und Ben Fry.</p>
+<h2 id="hallo-linie">Hallo Linie</h2>
+<p><code>line(10,10,300,200);</code></p>
+<p>Ausführen durch “Run” Button (= Ctrl+R).</p>
+<p>Die Größe des Fensters ändern:</p>
+<pre><code>size(500,400);</code></pre>
+<p>Den Hintergrund weiss machen:</p>
+<pre><code>background(255);</code></pre>
+<p>Den Strich rot machen:</p>
+<pre><code>stroke(255,0,0);</code></pre>
+<h2 id="statisch-versus-interaktiv">Statisch versus Interaktiv</h2>
+<p>Schreibt man den Code wie oben, ist er unveränderlich. Interaktive oder sich bewegende Bilder müssen aber Frame für Frame neu ausgerechnet werden. Dazu werden zwei eingebaute Funktionen benutzt: <code>setup()</code> und <code>draw()</code>.</p>
+<p><strong><code>setup()</code></strong> läuft nur einmal und wird für statische Setzungen oder Initialisierungen benutzt. Die erste Zeile soll immer <code>size()</code> sein.</p>
+<pre><code>void setup() {
+  size(400, 400);
+  stroke(255);
+  background(192, 64, 0);
+}</code></pre>
+<p><strong><code>draw()</code></strong> wird Frame für Frame neu befragt. Hier kommt also alles sich verändernde rein:</p>
+<pre><code>void draw() {
+  line(150, 25, mouseX, mouseY);
+}</code></pre>
+<p>Da der Hintergrund hier in der <code>setup()</code> Funktion erzeugt wird, ändert er sich nicht. Die Alternative ist dieses Programm:</p>
+<pre><code>void setup() {
+  size(500,400);
+  stroke(255,0,0);
+}
+
+void draw() {
+  background(255);
+  line(10,10,mouseX,mouseY);
+}</code></pre>
+<p>Andere vordefinierte Funktionen erweitern die Interaktivität. Das folgende Programm löscht immer dann das Bild, wenn die Maus gedrückt wurde:</p>
+<pre><code>void setup() {
+  size(400, 400);
+  stroke(255);
+}
+
+void draw() {
+  line(150, 25, mouseX, mouseY);
+}
+
+void mousePressed() {
+  background(192, 64, 0);
+}</code></pre>
+<h2 id="bilddateien-exportieren">Bilddateien exportieren</h2>
+<p><code>saveFrame()</code> am Ende von <code>draw()</code> erzeugt tiff Dateien für jedes Frame.<br />
+Alternative Formate mit <code>saveFrame("output.png")</code> oder <code>saveFrame("output-####.png")</code>.</p>
+<p>PDF Dateien exportieren mit der entsprechenden Bibliothek.</p>
+<h2 id="bilder-importieren-und-anzeigen">Bilder importieren und anzeigen</h2>
+<p>(Normaler Suchort: Der Ordner “data” in dem Sketchbook Ordner.)</p>
+<pre><code>PImage img; //eine variable vom typ PImage deklarieren
+
+void setup(){
+  size(600,400);
+  img = loadImage(&quot;flowchart.jpg&quot;);
+}
+
+void draw(){
+  background(0);
+  //parameter: variable, x, y, optional anzuzeigende breite und höhe
+  image(img,0,0,width,height); 
+}</code></pre>
+<p>Die <code>tint()</code> Funktion erlaubt viele Veränderungen, z.B. Farbänderungen, Durchsichtigkeit.</p>

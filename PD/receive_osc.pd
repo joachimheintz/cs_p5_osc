@@ -1,0 +1,12 @@
+#N canvas 24 578 580 391 12;
+#X obj 19 119 oscparse;
+#X obj 19 142 print parse-output;
+#X obj 19 92 netreceive -u -b;
+#X msg 31 65 listen 0;
+#X text 16 13 packets from network;
+#X text 118 38 <- set port here!;
+#X msg 19 37 listen 12002;
+#X connect 0 0 1 0;
+#X connect 2 0 0 0;
+#X connect 3 0 2 0;
+#X connect 6 0 2 0;
